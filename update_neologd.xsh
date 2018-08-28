@@ -47,17 +47,13 @@ echo put @(str(len(line_put)))
 echo edit @(str(len(line_edit)))
 
 now = datetime.datetime.now()
-f = open(DIFF_PATH + '/neologd_diff_summary_{0:%Y%m%d}.txt'.format(now), 'w')
-for l in line_delete:
-    f.write(l)
-    f.write('\n')
-for l in line_put:
-    f.write(l)
-    f.write('\n')
-for l in line_edit:
-    f.write(l)
-    f.write('\n')
-f.close()
+with open(DIFF_PATH + '/neologd_diff_summary_{0:%Y%m%d}.txt'.format(now), 'w') as f:
+    for l in line_delete:
+        f.write(l + '\n')
+    for l in line_put:
+        f.write(l + '\n')
+    for l in line_edit:
+        f.write(l + '\n')
 
 rm @(DIFF_PATH + '/diff_from.csv')
 rm @(DIFF_PATH + '/diff_to.csv')
